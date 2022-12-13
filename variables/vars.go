@@ -6,14 +6,16 @@ import (
 	"strconv"
 )
 
-// Initialization
+// Declaration
 var (
 	text    string
 	address string
 	age     int
 )
 
+// Declaration & Initialization
 var (
+	// Type inference at work
 	name   = "Will Wheaton"
 	course = "Star Wars Academy"
 	module = "4"
@@ -36,6 +38,7 @@ func main() {
 		fmt.Println("Could not convert module to int:", err)
 	}
 
+	// Pointers
 	fmt.Println("---")
 	var ptr *string = &course
 	fmt.Println("Type of 'ptr':", reflect.TypeOf(ptr))
@@ -51,12 +54,14 @@ func main() {
 	fmt.Println("After applying updates on text:", text)
 }
 
+// Pass by value
 func updateTextByVal(text string) string {
 	text = "Now is the time"
 	fmt.Println("Updated text to:", text)
 	return text
 }
 
+// Pass by reference
 func updateTextByRef(text *string) string {
 	*text = "Godspeed ahead!"
 	fmt.Println("Updated text to:", *text)
