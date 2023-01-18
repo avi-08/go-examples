@@ -8,4 +8,7 @@
 go run hello-world/hello.go
 
 go build hello-world/hello.go
+
+# Build with specified name
+go build -o hello-world/greeting hello-world/quote.go
 ```
