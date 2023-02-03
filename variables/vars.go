@@ -7,6 +7,8 @@ import (
 )
 
 // Declaration
+// Accessible at package level
+// Note: Only declare variables in the package block that are effectively immutable
 var (
 	text    string
 	address string
@@ -14,13 +16,18 @@ var (
 )
 
 // Declaration & Initialization
+// Accessible at package level
+// Note: Only declare variables in the package block that are effectively immutable
 var (
 	// Type inference at work
-	name   = "Will Wheaton"
-	course = "Star Wars Academy"
-	module = "4"
-	clip   = 10
+	name   = "Will Wheaton"      // string
+	course = "Star Wars Academy" // string
+	module = "4"                 // string
+	clip   = 10                  // int
 )
+
+// Package level variables can remain unused.
+var unused = "This is unused variable."
 
 func main() {
 	fmt.Println("Initial values of text: [", text, "], address: [", address, "], age; [", age, "].")
@@ -31,12 +38,20 @@ func main() {
 	fmt.Println("Type of 'text':", reflect.TypeOf(text))
 	fmt.Println("Type of 'age':", reflect.TypeOf(age))
 
+	// Yet another way of declaring using :=
+	// := can create new vars as well as update existing vars
+	// For updating, atleast one new var on LHS must be defined
+	// Note: Good practice to use this way within function blocks only.
 	iModule, err := strconv.Atoi(module)
 	if err == nil {
 		fmt.Println("Module added to Clips:", iModule+clip)
 	} else {
 		fmt.Println("Could not convert module to int:", err)
 	}
+
+	// every declared local variable must be read
+	// unused_local declared but not used
+	// var unused_local = "This will raise compilation error."
 
 	// Pointers
 	fmt.Println("---")
