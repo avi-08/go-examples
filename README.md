@@ -2,6 +2,8 @@
 
 [![Go](https://img.shields.io/badge/--00ADD8?logo=go&logoColor=ffffff)](https://golang.org/) Golang learning path
 
+Based on learnings from the book [*Learning Go by Jon Bodner*](https://www.oreilly.com/library/view/learning-go/9781492077206/)
+
 ## Build and run
 
 ```bash
