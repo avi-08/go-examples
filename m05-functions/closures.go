@@ -7,6 +7,8 @@ import (
 	"io"
 	"log"
 	"os"
+	"path"
+	"runtime"
 	"sort"
 )
 
@@ -71,10 +73,9 @@ func makeMult(base int) func(int) int {
 }
 
 func deferExample() {
-	if len(os.Args) < 2 {
-		log.Fatal("no file specified")
-	}
-	f, err := os.Open(os.Args[1])
+	filepath := getFilePath()
+	fmt.Println("opening file:", filepath)
+	f, err := os.Open(filepath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -144,10 +145,22 @@ func getFile(name string) (*os.File, func(), error) {
 }
 
 func getFileExample() {
-	_, closer, err := getFile(os.Args[1])
+	_, closer, err := getFile(getFilePath())
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println("Didn't really want to read the file!")
 	defer closer()
+}
+
+func getFilePath() string {
+	if len(os.Args) < 2 {
+		fmt.Println("no file provided, using sample")
+		_, filename, _, ok := runtime.Caller(0)
+		if !ok {
+			panic("No caller information")
+		}
+		return path.Join(path.Dir(filename), "..", "samples", "hello-world.txt")
+	}
+	return os.Args[1]
 }
